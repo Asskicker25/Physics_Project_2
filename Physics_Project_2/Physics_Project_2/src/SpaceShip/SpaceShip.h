@@ -18,6 +18,8 @@ public:
 	float speed = 10;
 	float rotateSpeed = 5;
 
+	bool drawCollisionAabbs = true;
+
 	SpaceShip(Shader* shader);
 	void SetCamera(Camera* camera);
 

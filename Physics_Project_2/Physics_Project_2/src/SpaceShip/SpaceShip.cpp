@@ -17,11 +17,14 @@ void SpaceShip::SetCamera(Camera* camera)
 
 void SpaceShip::DrawCollisionAabbs(PhysicsObject* phyObj)
 {
+	if (!drawCollisionAabbs) return;
+	//renderer->DrawAABB(GetGraphicsAabb(phyObj->GetModelAABB()), glm::vec4(1.0, .0, 0.0f, 1.0f), false);
+
 	std::vector<Aabb> collisionAabb = phyObj->GetCollisionAabbs();
 
 	for (Aabb aabb : collisionAabb)
 	{
-		renderer->DrawAABB(GetGraphicsAabb(aabb), glm::vec4(0.0, 1.0, 0.0f, 1.0f));
+		renderer->DrawAABB(GetGraphicsAabb(aabb), glm::vec4(0.0, 1.0, 0.0f, 1.0f),false);
 	}
 }
 
@@ -46,7 +49,7 @@ void SpaceShip::AddToRendererAndPhysics(Renderer* renderer, Shader* shader, Phys
 
 	model->LoadModel("Assets/Models/SpaceShip.fbx");
 	model->transform.SetScale(glm::vec3(0.01f));
-	model->transform.SetPosition(glm::vec3(-10.0f, 80.0f, 5.0f));
+	model->transform.SetPosition(glm::vec3(-10.0f, 150.0f, 5.0f));
 	model->meshes[0]->material->AsMaterial()->SetBaseColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	model->meshes[1]->material->AsMaterial()->SetBaseColor(glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
 	renderer->AddModel(model, alphaShader);
@@ -129,8 +132,15 @@ void SpaceShip::OnKeyPressed(const int& key)
 			model->transform.rotation.z
 		));
 	}
+	
+
 
 	camera->SetCameraPosition(model->transform.position + forward * followOffset + glm::vec3(0, yOffset, 0));
+
+	if (key == GLFW_KEY_SPACE)
+	{
+		drawCollisionAabbs = !drawCollisionAabbs;
+	}
 }
 
 void SpaceShip::OnKeyReleased(const int& key)

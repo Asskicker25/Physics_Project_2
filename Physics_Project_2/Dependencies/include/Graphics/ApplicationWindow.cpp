@@ -115,9 +115,11 @@ void ApplicationWindow::InitializeWindow(int windowWidth, int windowHeight)
 	renderer.camera = camera;
 
 
-	debugCubes = new DebugModels("res/Models/DefaultCube.fbx");
+	debugCubesModel = new DebugModels("res/Models/DefaultCube.fbx");
+	debugCubesData = new DebugModels(cubeData);
 	debugSpheres = new DebugModels("res/Models/DefaultSphere.fbx");
-	renderer.debugCubes = debugCubes;
+	renderer.debugCubesModel = debugCubesModel;
+	renderer.debugCubesData = debugCubesData;
 	renderer.debugSpheres = debugSpheres;
 
 	renderer.skyBox = new ModelAndShader({ skyBox,&skyboxShader });
@@ -193,7 +195,8 @@ void ApplicationWindow::Render()
 		renderer.Draw();
 		//debugRenderer.Draw();
 
-		debugCubes->Clear();
+		debugCubesModel->Clear();
+		debugCubesData->Clear();
 
 		PostRender();
 

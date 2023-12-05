@@ -17,6 +17,7 @@
 #include "UnlitColorMaterial.h"
 #include "CubeMapTexture.h"
 #include "SkyBoxMaterial.h"
+#include "DebugCubeData.h"
 
 class ApplicationWindow
 {
@@ -58,8 +59,11 @@ public:
 	Renderer renderer;
 	LightManager lightManager;
 
-	DebugModels* debugCubes;
+	DebugModels* debugCubesModel;
+	DebugModels* debugCubesData;
 	DebugModels* debugSpheres;
+
+	DebugCubeData cubeData;
 
 	Shader solidColorShader;
 	Shader defShader;

@@ -194,6 +194,19 @@ Model* Model::CopyFromModel(const Model& model)
 	return this;
 }
 
+
+void Model::LoadModel(MeshDataHolder& meshData, bool loadTextures)
+{
+	this->loadTextures = loadTextures;
+
+	UnlitColorMaterial* meshMat = new UnlitColorMaterial();
+	
+	meshes.push_back(new MeshAndMaterial
+		{ std::make_shared<Mesh>(meshData.vertices, meshData.indices), meshMat });
+
+}
+
+
 void Model::LoadModel(const std::string& path, bool loadTextures)
 {
 	this->loadTextures = loadTextures;

@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "Transform.h"
 #include "BaseMaterial.h"
+#include "MeshDataHolder.h"
 
 class Renderer;
 
@@ -38,6 +39,7 @@ public:
 	//Material material;
 
 	void LoadModel(const std::string& path, bool loadTextures = true);
+	void LoadModel(MeshDataHolder& meshData, bool loadTextures = true);
 	void DrawNormals();
 	void DrawShaded(Shader* shader);
 	void DrawWireframe(const glm::vec3& color);
