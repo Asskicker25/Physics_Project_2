@@ -23,7 +23,7 @@ void City::AddToRendererAndPhysics(Renderer* renderer, Shader* shader, PhysicsEn
 	renderer->AddModel(model, shader);
 
 	phyObj = new PhysicsObject();
-	phyObj->maxDepth = 10;
+	phyObj->maxDepth = 20;
 	phyObj->Initialize(model, MESH_OF_TRIANGLES, STATIC);
 	physicsEngine->AddPhysicsObject(phyObj);
 }

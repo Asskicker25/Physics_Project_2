@@ -22,6 +22,11 @@ public:
 	void SetCamera(Camera* camera);
 
 private:
+	Renderer* renderer;
+
+	void DrawCollisionAabbs(PhysicsObject* phyObj);
+	
+
 	// Inherited via Entity
 	void Start() override;
 	void Update(float deltaTime) override;

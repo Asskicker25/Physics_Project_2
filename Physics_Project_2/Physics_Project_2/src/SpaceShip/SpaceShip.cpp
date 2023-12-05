@@ -15,6 +15,16 @@ void SpaceShip::SetCamera(Camera* camera)
 	this->camera = camera;
 }
 
+void SpaceShip::DrawCollisionAabbs(PhysicsObject* phyObj)
+{
+	std::vector<Aabb> collisionAabb = phyObj->GetCollisionAabbs();
+
+	for (Aabb aabb : collisionAabb)
+	{
+		renderer->DrawAABB(GetGraphicsAabb(aabb), glm::vec4(0.0, 1.0, 0.0f, 1.0f));
+	}
+}
+
 
 void SpaceShip::Start()
 {
@@ -25,11 +35,15 @@ void SpaceShip::Update(float deltaTime)
 {
 	glm::vec3 forward = model->transform.GetForward();
 	camera->SetCameraPosition(model->transform.position + forward * followOffset + glm::vec3(0, yOffset, 0));
+
+	DrawCollisionAabbs(phyObj);
 	//camera->SetCameraRotation(forward);
 }
 
 void SpaceShip::AddToRendererAndPhysics(Renderer* renderer, Shader* shader, PhysicsEngine* physicsEngine)
 {
+	this->renderer = renderer;
+
 	model->LoadModel("Assets/Models/SpaceShip.fbx");
 	model->transform.SetScale(glm::vec3(0.01f));
 	model->transform.SetPosition(glm::vec3(-10.0f, 80.0f, 5.0f));

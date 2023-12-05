@@ -21,6 +21,7 @@ private:
 	std::vector <Sphere*>  triangleSpheres;
 	std::vector <glm::vec3> collisionPoints;
 	std::vector <glm::vec3> collisionNormals;
+	std::vector<Aabb> collisionAabbs;
 
 	std::function<void(PhysicsObject*)> collisionCallback = nullptr;
 
@@ -76,8 +77,10 @@ public:
 	const std::vector < Sphere* >& GetSphereList();
 	const std::vector <glm::vec3>& GetCollisionPoints();
 	const std::vector <glm::vec3>& GetCollisionNormals();
+	const std::vector<Aabb>& GetCollisionAabbs();
 	void SetCollisionPoints(const std::vector <glm::vec3>& collisionPoints);
 	void SetCollisionNormals(const std::vector <glm::vec3>& collisionNormals);
+	void SetCollisionAabbs(const std::vector <Aabb>& collisionAabs);
 
 	// Inherited via iPhysicsTransformable
 	glm::vec3 GetPosition() override;

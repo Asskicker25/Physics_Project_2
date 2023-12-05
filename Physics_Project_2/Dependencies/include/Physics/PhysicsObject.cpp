@@ -55,12 +55,22 @@ const std::vector<glm::vec3>& PhysicsObject::GetCollisionNormals()
 	return collisionNormals;
 }
 
+const std::vector<Aabb>& PhysicsObject::GetCollisionAabbs()
+{
+	return collisionAabbs;
+}
+
 void PhysicsObject::SetCollisionPoints(const std::vector<glm::vec3>& collisionPoints)
 {
 	this->collisionPoints = collisionPoints;
 }
 
 void PhysicsObject::SetCollisionNormals(const std::vector<glm::vec3>& collisionNormals)
+{
+	this->collisionNormals = collisionNormals;
+}
+
+void PhysicsObject::SetCollisionAabbs(const std::vector<Aabb>& collisionAabs)
 {
 	this->collisionNormals = collisionNormals;
 }
@@ -281,7 +291,7 @@ bool PhysicsObject::CheckCollision(PhysicsObject* other,
 				return CollisionSphereVsMeshOfTriangles(GetModelAABB(),
 					dynamic_cast<Sphere*>(GetTransformedPhysicsShape()),
 						other->hierarchialAABB->rootNode, other->model->transform.GetTransformMatrix(),
-						other->GetTriangleList(), collisionPoints, collisionNormals
+						other->GetTriangleList(), collisionPoints, collisionNormals,collisionAabbs
 						);
 			}
 
@@ -313,7 +323,7 @@ bool PhysicsObject::CheckCollision(PhysicsObject* other,
 			{
 				return CollisionAABBVsMeshOfTriangles(GetModelAABB(),
 					other->hierarchialAABB->rootNode, other->model->transform.GetTransformMatrix(),
-					other->GetTriangleList(), collisionPoints, collisionNormals);
+					other->GetTriangleList(), collisionPoints, collisionNormals, collisionAabbs);
 			}
 			return CollisionAABBVsMeshOfTriangles(GetModelAABB(),
 				other->model->transform.GetTransformMatrix(),
@@ -332,7 +342,7 @@ bool PhysicsObject::CheckCollision(PhysicsObject* other,
 			{
 				return CollisionAABBVsMeshOfTriangles(other->GetModelAABB(),
 					hierarchialAABB->rootNode, model->transform.GetTransformMatrix(),
-					GetTriangleList(), collisionPoints, collisionNormals);
+					GetTriangleList(), collisionPoints, collisionNormals, collisionAabbs);
 			}
 			return CollisionAABBVsMeshOfTriangles(other->GetModelAABB(),
 				model->transform.GetTransformMatrix(),
@@ -345,7 +355,7 @@ bool PhysicsObject::CheckCollision(PhysicsObject* other,
 				return CollisionSphereVsMeshOfTriangles(other->GetModelAABB(),
 					dynamic_cast<Sphere*>(other->GetTransformedPhysicsShape()),
 					hierarchialAABB->rootNode, model->transform.GetTransformMatrix(),
-					GetTriangleList(), collisionPoints, collisionNormals
+					GetTriangleList(), collisionPoints, collisionNormals, collisionAabbs
 				);
 			}
 

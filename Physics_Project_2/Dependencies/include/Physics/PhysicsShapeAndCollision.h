@@ -830,11 +830,14 @@ static bool CollisionSphereVsMeshOfTriangles(Sphere* sphere,
 	return false;
 }
 
-extern  void CollisionAABBvsHAABB(const Aabb& sphereAabb, HierarchicalAABBNode* rootNode, std::set<int>& triangleIndices);
+extern  void CollisionAABBvsHAABB(const Aabb& sphereAabb, 
+	HierarchicalAABBNode* rootNode, std::set<int>& triangleIndices, std::vector<Aabb>& collisionAabbs);
+
 extern  bool CollisionSphereVsMeshOfTriangles(const Aabb& sphereAabb, Sphere* sphere, HierarchicalAABBNode* rootNode,
 	const glm::mat4 transformMatrix, const std::vector <Triangle>& triangles,
 	std::vector<glm::vec3>& collisionPoints,
-	std::vector<glm::vec3>& collisionNormals);
+	std::vector<glm::vec3>& collisionNormals,
+	std::vector<Aabb>& collisionAabbs);
 
 static bool CollisionAABBVsMeshOfTriangles(const Aabb& aabb,
 	const glm::mat4& transformMatrix,
@@ -899,7 +902,8 @@ static bool CollisionAABBVsMeshOfTriangles(const Aabb& aabb,
 extern bool CollisionAABBVsMeshOfTriangles(const Aabb& aabb, HierarchicalAABBNode* rootNode,
 	const glm::mat4 transformMatrix, const std::vector <Triangle>& triangles,
 	std::vector<glm::vec3>& collisionPoints,
-	std::vector<glm::vec3>& collisionNormals);
+	std::vector<glm::vec3>& collisionNormals,
+	std::vector<Aabb>& collisionAabbs);
 
 extern bool CollisionMeshVsMesh(HierarchicalAABBNode* mesh1, HierarchicalAABBNode* mesh2,
 	const glm::mat4 transformMatrix1, const glm::mat4 transformMatrix2,
