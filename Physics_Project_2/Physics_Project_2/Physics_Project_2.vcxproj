@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ImpactSpheres\ImpactSpheres.cpp" />
     <ClCompile Include="src\City\City.cpp" />
     <ClCompile Include="src\SpaceShip\SpaceShip.cpp" />
     <ClCompile Include="src\EntityManager\Entity.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ImpactSpheres\ImpactSpheres.h" />
     <ClInclude Include="src\City\City.h" />
     <ClInclude Include="src\SpaceShip\SpaceShip.h" />
     <ClInclude Include="src\EntityManager\Entity.h" />

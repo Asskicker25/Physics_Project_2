@@ -1,6 +1,7 @@
 #include "PhysicsApplication.h"
 #include "SpaceShip/SpaceShip.h"
 #include "City/City.h"
+#include "ImpactSpheres/ImpactSpheres.h"
 
 void PhysicsApplication::SetUp()
 {
@@ -28,6 +29,7 @@ void PhysicsApplication::SetUp()
 	SpaceShip* spaceShip = new SpaceShip(&alphaBlendShader);
 	spaceShip->SetCamera(camera);
 	City* city = new City();
+	ImpactSpheres::GetInstance().CalcualteTime(deltaTime);
 
 	EntityManager::GetInstance().Start();
 }

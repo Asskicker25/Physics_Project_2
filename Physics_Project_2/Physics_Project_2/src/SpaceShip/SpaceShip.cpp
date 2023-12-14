@@ -1,4 +1,5 @@
 #include "SpaceShip.h"
+#include "../ImpactSpheres/ImpactSpheres.h"
 
 SpaceShip::SpaceShip(Shader* shader)
 {
@@ -18,7 +19,7 @@ void SpaceShip::SetCamera(Camera* camera)
 void SpaceShip::DrawCollisionAabbs(PhysicsObject* phyObj)
 {
 	if (!drawCollisionAabbs) return;
-	//renderer->DrawAABB(GetGraphicsAabb(phyObj->GetModelAABB()), glm::vec4(1.0, .0, 0.0f, 1.0f), false);
+	renderer->DrawAABB(GetGraphicsAabb(phyObj->GetModelAABB()), glm::vec4(1.0, .0, 0.0f, 1.0f), false);
 
 	std::vector<Aabb> collisionAabb = phyObj->GetCollisionAabbs();
 
@@ -60,6 +61,7 @@ void SpaceShip::AddToRendererAndPhysics(Renderer* renderer, Shader* shader, Phys
 			glm::vec3 normal = phyObj->GetCollisionNormals()[0];
 			float dotProduct = glm::dot(phyObj->velocity, normal);
 			phyObj->velocity -= dotProduct * normal;
+			ImpactSpheres::GetInstance().AddCollisionPoint(phyObj->GetCollisionPoints()[0]);
 		});
 	physicsEngine->AddPhysicsObject(phyObj);
 }
